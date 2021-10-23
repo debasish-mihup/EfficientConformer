@@ -109,6 +109,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
             torch.save(label, label_path)
             audio_path_without_extension = "./"+"".join(label_path.split(".")[:-1])
             # Save Audio length
+            print(audio_path_without_extension + ".wav", "  , Status: ",os.path.isfile(audio_path_without_extension + ".wav"), os.getcwd())
             audio_length = torchaudio.load(audio_path_without_extension + ".wav")[0].size(1)
             torch.save(audio_length, audio_path_without_extension + ".wav_len")
 
