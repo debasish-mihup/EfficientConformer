@@ -70,13 +70,13 @@ def create_tokenizer(training_params, tokenizer_params):
 
         # Corpus File Path
         corpus_path = training_params["training_dataset_path"] + training_params["training_dataset"] + "_corpus.txt"
-
+        print("DEBUG1 ", corpus_path)
         # Create Corpus File
         if not os.path.isfile(corpus_path):
             print("Create Corpus File")
             corpus_file = open(corpus_path, "w")
             file_list = glob.glob(training_params["training_dataset_path"] + "*/*.txt")
-            print(training_params["training_dataset_path"] + "*/*.txt", " , len: ",len(file_list))
+            print("DEBUG2 ", training_params["training_dataset_path"] + "*/*.txt", " , len: ",len(file_list))
             for file_path in file_list:
                 for line in open(file_path, "r").readlines():
                     corpus_file.write(line[len(line.split()[0]) + 1:-1].lower() + "\n")
