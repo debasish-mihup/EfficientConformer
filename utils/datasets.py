@@ -27,7 +27,7 @@ from tqdm import tqdm
 class MihupDataset(torch.utils.data.Dataset): 
     def __init__(self, dataset_path, training_params, tokenizer_params, split, args):
 
-        self.names = glob.glob(dataset_path + split + "*/*.wav")
+        self.names = glob.glob(dataset_path + split + "*.wav")
         self.vocab_type = tokenizer_params["vocab_type"]
         self.vocab_size = str(tokenizer_params["vocab_size"])
         self.lm_mode = training_params.get("lm_mode", False)

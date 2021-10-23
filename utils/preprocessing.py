@@ -75,8 +75,8 @@ def create_tokenizer(training_params, tokenizer_params):
         if not os.path.isfile(corpus_path):
             print("Create Corpus File")
             corpus_file = open(corpus_path, "w")
-            file_list = glob.glob(training_params["training_dataset_path"] + "*/*.txt")
-            print("DEBUG2 ", training_params["training_dataset_path"] + "*/*.txt", " , len: ",len(file_list))
+            file_list = glob.glob(training_params["training_dataset_path"] + "*.txt")
+            print("DEBUG2 ", training_params["training_dataset_path"] + "*.txt", " , len: ",len(file_list))
             for file_path in file_list:
                 for line in open(file_path, "r").readlines():
                     corpus_file.write(line[len(line.split()[0]) + 1:-1].lower() + "\n")
@@ -95,7 +95,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
         print("Reading Corpus")
         label_paths = []
         sentences = []
-        for file_path in glob.glob(training_params["training_dataset_path"] + "*/*.txt"):
+        for file_path in glob.glob(training_params["training_dataset_path"] + "*.txt"):
             for line in open(file_path, "r").readlines():
                 label_paths.append(file_path.replace(file_path.split("/")[-1], "") + line.split()[0] + "." + tokenizer_params["vocab_type"] + "_" + str(tokenizer_params["vocab_size"]))
                 sentences.append(line[len(line.split()[0]) + 1:-1].lower())
