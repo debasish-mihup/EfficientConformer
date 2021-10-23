@@ -107,11 +107,10 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
             # Tokenize and Save label
             label = torch.LongTensor(tokenizer.encode(sentence))
             torch.save(label, label_path)
-            print("DEBUG3 ", label_path)
-
+            audio_path_without_extension = "".join(label_path.split(".")[:-1])
             # Save Audio length
-            audio_length = torchaudio.load(label_path.split(".")[0] + ".wav")[0].size(1)
-            torch.save(audio_length, label_path.split(".")[0] + ".wav_len")
+            audio_length = torchaudio.load(audio_path_without_extension + ".wav")[0].size(1)
+            torch.save(audio_length, audio_path_without_extension + ".wav_len")
 
             # Save Label length
             label_length = label.size(0)
