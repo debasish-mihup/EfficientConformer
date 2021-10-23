@@ -65,8 +65,8 @@ def collate_fn_pad(batch):
 
 def create_tokenizer(training_params, tokenizer_params):
 
-    # LibriSpeech Dataset
-    if training_params["training_dataset"] == "LibriSpeech":
+    # Mihup Dataset
+    if training_params["training_dataset"] == "Mihup":
 
         # Corpus File Path
         corpus_path = training_params["training_dataset_path"] + training_params["training_dataset"] + "_corpus.txt"
@@ -86,14 +86,14 @@ def create_tokenizer(training_params, tokenizer_params):
 
 def prepare_dataset(training_params, tokenizer_params, tokenizer):
 
-    # LibriSpeech Dataset
-    if training_params["training_dataset"] == "LibriSpeech":
+    # Mihup Dataset
+    if training_params["training_dataset"] == "Mihup":
 
         # Read corpus
         print("Reading Corpus")
         label_paths = []
         sentences = []
-        for file_path in glob.glob(training_params["training_dataset_path"] + "*/*/*/*.txt"):
+        for file_path in glob.glob(training_params["training_dataset_path"] + "*/*.txt"):
             for line in open(file_path, "r").readlines():
                 label_paths.append(file_path.replace(file_path.split("/")[-1], "") + line.split()[0] + "." + tokenizer_params["vocab_type"] + "_" + str(tokenizer_params["vocab_size"]))
                 sentences.append(line[len(line.split()[0]) + 1:-1].lower())
@@ -110,8 +110,8 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
             torch.save(label, label_path)
 
             # Save Audio length
-            audio_length = torchaudio.load(label_path.split(".")[0] + ".flac")[0].size(1)
-            torch.save(audio_length, label_path.split(".")[0] + ".flac_len")
+            audio_length = torchaudio.load(label_path.split(".")[0] + ".wav")[0].size(1)
+            torch.save(audio_length, label_path.split(".")[0] + ".wav_len")
 
             # Save Label length
             label_length = label.size(0)

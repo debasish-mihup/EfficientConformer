@@ -19,13 +19,13 @@ pip install -r requirements.txt
 
 Install [ctcdecode](https://github.com/parlance/ctcdecode)
 
-## Download LibriSpeech
+## Download Mihup
 
-[Librispeech](https://www.openslr.org/12) is a corpus of approximately 1000 hours of 16kHz read English speech, prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read audiobooks from the LibriVox project, and has been carefully segmented and aligned.
+[Mihup](https://www.openslr.org/12) is a corpus of approximately 1000 hours of 16kHz read English speech, prepared by Vassil Panayotov with the assistance of Daniel Povey. The data is derived from read audiobooks from the LibriVox project, and has been carefully segmented and aligned.
 
 ```
 cd datasets
-./download_LibriSpeech.sh
+./download_Mihup.sh
 ```
 
 ## Running an experiment
@@ -49,7 +49,7 @@ python main.py --config_file configs/config_file.json --initial_epoch epoch/name
 
 ```
 -c / --config_file		type=str   default="configs/EfficientConformerCTCSmall.json"	help="Json configuration file containing model hyperparameters"
--m / --mode                	type=str   default="training"                               	help="Mode : training, validation-clean, test-clean, eval_time-dev-clean, ..."
+-m / --mode                	type=str   default="training"                               	help="Mode : training, validation"
 -d / --distributed         	action="store_true"                                            	help="Distributed data parallelization"
 -i / --initial_epoch  		type=str   default=None                                       	help="Load model from checkpoint"
 --initial_epoch_lm         	type=str   default=None                                       	help="Load language model from checkpoint"
@@ -85,7 +85,7 @@ tensorboard --logdir callback_path
 
 <img src="media/logs.jpg"/>
 
-## LibriSpeech Performance
+## Mihup Performance
 
 | Model        			| Size     	| Type  | Params (M) | test-clean/test-other gready WER (%)| test-clean/test-other n-gram WER (%) | GPUs |
 | :-------------------:	|:--------:	|:-----:|:----------:|:------:|:------:|:------:|

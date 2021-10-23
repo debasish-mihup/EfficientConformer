@@ -23,11 +23,11 @@ import sentencepiece as spm
 import glob
 from tqdm import tqdm
 
-# Librispeech 292.367 samples
-class LibriSpeechDataset(torch.utils.data.Dataset): 
+# Mihup 292.367 samples
+class MihupDataset(torch.utils.data.Dataset): 
     def __init__(self, dataset_path, training_params, tokenizer_params, split, args):
 
-        self.names = glob.glob(dataset_path + split + "*/*/*/*.flac")
+        self.names = glob.glob(dataset_path + split + "*/*.wav")
         self.vocab_type = tokenizer_params["vocab_type"]
         self.vocab_size = str(tokenizer_params["vocab_size"])
         self.lm_mode = training_params.get("lm_mode", False)
@@ -40,9 +40,9 @@ class LibriSpeechDataset(torch.utils.data.Dataset):
     def __getitem__(self, i):
 
         if self.lm_mode:
-            return [torch.load(self.names[i].split(".flac")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
+            return [torch.load(self.names[i].split(".wav")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
         else:
-            return [torchaudio.load(self.names[i])[0], torch.load(self.names[i].split(".flac")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
+            return [torchaudio.load(self.names[i])[0], torch.load(self.names[i].split(".wav")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
 
     def __len__(self):
 
@@ -54,29 +54,8 @@ class LibriSpeechDataset(torch.utils.data.Dataset):
             return self.names
 
         if rank == 0:
-            print("LibriSpeech dataset filtering")
+            print("Mihup dataset filtering")
             print("Audio maximum length : {} / Label sequence maximum length : {}".format(audio_max_length, label_max_length))
             self.names = tqdm(self.names)
 
-        return [name for name in self.names if torch.load(name + "_len") <= audio_max_length and torch.load(name.replace("flac", self.vocab_type + "_" + self.vocab_size + "_len")) <= label_max_length]
-            
-# Librispeech Corpus 40.418.261 samples
-class LibriSpeechCorpusDataset(torch.utils.data.Dataset): 
-    def __init__(self, dataset_path, training_params, tokenizer_params, split, args):
-
-        # Dataset Params
-        self.tokenizer = spm.SentencePieceProcessor(tokenizer_params["tokenizer_path"])
-        self.corpus = open(dataset_path, 'r').readlines()
-        self.max_len = training_params["train_label_max_length"]
-
-    def __getitem__(self, i):
-
-        if self.max_len:
-            while len(self.tokenizer.encode(self.corpus[i][:-1].lower())) > self.max_len:
-                i = torch.randint(0, self.__len__(), [])
-
-        return [torch.LongTensor(self.tokenizer.encode(self.corpus[i][:-1].lower()))]
-
-    def __len__(self):
-
-        return len(self.corpus)
+        return [name for name in self.names if torch.load(name + "_len") <= audio_max_length and torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")) <= label_max_length]

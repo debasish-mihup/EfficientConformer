@@ -12,7 +12,7 @@
     
     "tokenizer_params":
     {
-        "tokenizer_path": "datasets/LibriSpeech/LibriSpeech_bpe_1000.model",
+        "tokenizer_path": "datasets/Mihup/Mihup_bpe_1000.model",
         "vocab_type": "bpe",
         "vocab_size": 1000
     },
@@ -37,11 +37,11 @@
         "eval_audio_max_length": null,
         "eval_label_max_length": null,
 
-        "training_dataset": "LibriSpeechCorpus",
-        "training_dataset_path": "datasets/librispeech-lm-norm.txt",
+        "training_dataset": "MihupCorpus",
+        "training_dataset_path": "datasets/Mihup-lm-norm.txt",
 
-        "evaluation_dataset": "LibriSpeech",
-        "evaluation_dataset_path": "datasets/LibriSpeech/",
+        "evaluation_dataset": "Mihup",
+        "evaluation_dataset_path": "datasets/Mihup/",
         "lm_mode": true,
 
         "callback_path": "callbacks/LM-RNN/"

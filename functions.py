@@ -22,8 +22,7 @@ from models.lm import LanguageModel
 
 # Datasets
 from utils.datasets import (
-    LibriSpeechDataset,
-    LibriSpeechCorpusDataset
+    MihupDataset
 )
 
 # Preprocessing
@@ -87,25 +86,11 @@ def load_datasets(training_params, tokenizer_params, args):
     # Training Datasets
     training_datasets = {
 
-        "LibriSpeech": {
-            "class": LibriSpeechDataset,
+        "Mihup": {
+            "class": MihupDataset,
             "split": {
                 "training": "train",
                 "training-clean": "train-clean",
-                "validation-clean": None,
-                "validation-other": None,
-                "test-clean": None,
-                "test-other": None,
-                "eval_time": None,
-                "eval_time_encoder": None,
-                "eval_time_decoder": None,
-            }
-        },
-
-        "LibriSpeechCorpus": {
-            "class": LibriSpeechCorpusDataset,
-            "split": {
-                "training": "train",
                 "validation-clean": None,
                 "validation-other": None,
                 "test-clean": None,
@@ -120,34 +105,13 @@ def load_datasets(training_params, tokenizer_params, args):
     # Evaluation Datasets
     evaluation_datasets = {
 
-        "LibriSpeech": {
-            "class": LibriSpeechDataset,
+        "Mihup": {
+            "class": MihupDataset,
             "split": {
-                "training": ["dev-clean", "dev-other"],
-                "training-clean": ["dev-clean", "dev-other"],
-                "validation-clean": "dev-clean",
-                "validation-other": "dev-other",
-                "test-clean": "test-clean",
-                "test-other": "test-other",
-                "eval_time": "dev-clean",
-                "eval_time_encoder": "dev-clean",
-                "eval_time_decoder": "dev-clean",
+                "training": "training",
+                "validation": "validation"
             }
         },
-
-        "LibriSpeechCorpus": {
-            "class": LibriSpeechCorpusDataset,
-            "split": {
-                "training": "val",
-                "validation-clean": "val",
-                "validation-other": "val",
-                "test-clean": "test",
-                "test-other": "test",
-                "eval_time": "val",
-                "eval_time_encoder": "val",
-                "eval_time_decoder": "val",
-            }
-        }
     }
 
     # Select Dataset and Split
