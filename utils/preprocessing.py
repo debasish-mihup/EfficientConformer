@@ -75,7 +75,9 @@ def create_tokenizer(training_params, tokenizer_params):
         if not os.path.isfile(corpus_path):
             print("Create Corpus File")
             corpus_file = open(corpus_path, "w")
-            for file_path in glob.glob(training_params["training_dataset_path"] + "*/*.txt"):
+            file_list = glob.glob(training_params["training_dataset_path"] + "*/*.txt")
+            print(training_params["training_dataset_path"] + "*/*.txt", " , len: ",len(file_list))
+            for file_path in file_list:
                 for line in open(file_path, "r").readlines():
                     corpus_file.write(line[len(line.split()[0]) + 1:-1].lower() + "\n")
 
