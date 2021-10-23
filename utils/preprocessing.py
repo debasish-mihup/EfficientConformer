@@ -70,14 +70,11 @@ def create_tokenizer(training_params, tokenizer_params):
 
         # Corpus File Path
         corpus_path = training_params["training_dataset_path"] + training_params["training_dataset"] + "_corpus.txt"
-        print("DEBUG1 ", corpus_path)
         # Create Corpus File
         if not os.path.isfile(corpus_path):
             print("Create Corpus File")
             corpus_file = open(corpus_path, "w")
-            file_list = glob.glob(training_params["training_dataset_path"] + "*.txt")
-            print("DEBUG2 ", training_params["training_dataset_path"] + "*.txt", " , len: ",len(file_list))
-            for file_path in file_list:
+            for file_path in glob.glob(training_params["training_dataset_path"] + "*.txt"):
                 for line in open(file_path, "r").readlines():
                     corpus_file.write(line[len(line.split()[0]) + 1:-1].lower() + "\n")
 
@@ -110,6 +107,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
             # Tokenize and Save label
             label = torch.LongTensor(tokenizer.encode(sentence))
             torch.save(label, label_path)
+            print("DEBUG3 ", label_path)
 
             # Save Audio length
             audio_length = torchaudio.load(label_path.split(".")[0] + ".wav")[0].size(1)
