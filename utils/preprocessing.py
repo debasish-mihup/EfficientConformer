@@ -93,6 +93,8 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
         label_paths = []
         sentences = []
         for file_path in glob.glob(training_params["training_dataset_path"] + "*.txt"):
+            if "_corpus.txt" in file_path:
+                continue
             print("DEBUG3: ",file_path)
             for line in open(file_path, "r").readlines():
                 label_paths.append(file_path.replace(file_path.split("/")[-1], "") + line.split()[0] + "." + tokenizer_params["vocab_type"] + "_" + str(tokenizer_params["vocab_size"]))
