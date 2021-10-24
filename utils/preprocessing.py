@@ -95,7 +95,6 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
         for file_path in glob.glob(training_params["training_dataset_path"] + "*.txt"):
             if "_corpus.txt" in file_path:
                 continue
-            print("DEBUG3: ",file_path)
             for line in open(file_path, "r").readlines():
                 label_paths.append(file_path.replace(file_path.split("/")[-1], "") + line.split()[0] + "." + tokenizer_params["vocab_type"] + "_" + str(tokenizer_params["vocab_size"]))
                 sentences.append(line[len(line.split()[0]) + 1:-1].lower())
@@ -111,7 +110,6 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
             label = torch.LongTensor(tokenizer.encode(sentence))
             torch.save(label, label_path)
             audio_path_without_extension = ".".join(label_path.split(".")[:-1])
-            print("DEBUG4: " , audio_path_without_extension)
             # Save Audio length
             audio_length = torchaudio.load(audio_path_without_extension + ".wav")[0].size(1)
             torch.save(audio_length, audio_path_without_extension + ".wav_len")
