@@ -98,7 +98,7 @@ def main(rank, args):
 
         if args.rank == 0:
             print("Preparing dataset")
-            prepare_dataset(config["training_params"], config["tokenizer_params"], model.tokenizer)
+            prepare_dataset(config["training_params"], config["tokenizer_params"], model.tokenizer, args.re_encode_dataset)
 
         if args.distributed:
             torch.distributed.barrier()
@@ -189,6 +189,7 @@ if __name__ == "__main__":
     parser.add_argument("--initial_epoch_lm",           type=str,   default=None,                                       help="Load language model from checkpoint")
     parser.add_argument("--initial_epoch_encoder",      type=str,   default=None,                                       help="Load model encoder from encoder checkpoint")
     parser.add_argument("-p", "--prepare_dataset",      action="store_true",                                            help="Prepare dataset for training")
+    parser.add_argument("--re_encode_dataset",          type=bool, default=False,                                       help="Enabling this will make the prepare_dataset to enconde all audio data")
     parser.add_argument("-j", "--num_workers",          type=int,   default=8,                                          help="Number of data loading workers")
     parser.add_argument("--create_tokenizer",           action="store_true",                                            help="Create model tokenizer")
     parser.add_argument("--batch_size_eval",            type=int,   default=8,                                          help="Evaluation batch size")

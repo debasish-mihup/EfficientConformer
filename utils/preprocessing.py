@@ -83,7 +83,7 @@ def create_tokenizer(training_params, tokenizer_params):
         spm.SentencePieceTrainer.train(input=training_params["training_dataset_path"] + training_params["training_dataset"] + "_corpus.txt", model_prefix=tokenizer_params["tokenizer_path"].split(".model")[0], vocab_size=tokenizer_params["vocab_size"], character_coverage=1.0, model_type=tokenizer_params["vocab_type"], bos_id=-1, eos_id=-1, unk_surface="")
         print("Training Done")
 
-def prepare_dataset(training_params, tokenizer_params, tokenizer):
+def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_existing_training_data=False):
 
     # Mihup Dataset
     if training_params["training_dataset"] == "Mihup":
@@ -102,6 +102,12 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
         # Save Labels and lengths
         print("Encoding sequences")
         for i, (sentence, label_path) in enumerate(zip(sentences, label_paths)):
+            audio_path_without_extension = ".".join(label_path.split(".")[:-1])
+            tmp_filepath1 = audio_path_without_extension + ".wav"
+            tmp_filepath2 = audio_path_without_extension + ".wav_len"
+            tmp_filepath3 = label_path + "_len"
+            if not re_encode_existing_training_data and os.path.isfile(tmp_filepath1) and os.path.isfile(tmp_filepath2) and os.path.isfile(tmp_filepath3):
+                continue
             
             # Print
             sys.stdout.write("\r{}/{}".format(i, len(label_paths)))
@@ -109,7 +115,6 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer):
             # Tokenize and Save label
             label = torch.LongTensor(tokenizer.encode(sentence))
             torch.save(label, label_path)
-            audio_path_without_extension = ".".join(label_path.split(".")[:-1])
             # Save Audio length
             audio_length = torchaudio.load(audio_path_without_extension + ".wav")[0].size(1)
             torch.save(audio_length, audio_path_without_extension + ".wav_len")
