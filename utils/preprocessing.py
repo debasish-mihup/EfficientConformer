@@ -106,11 +106,11 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_exis
             tmp_filepath1 = audio_path_without_extension + ".wav"
             tmp_filepath2 = audio_path_without_extension + ".wav_len"
             tmp_filepath3 = label_path + "_len"
-            if not re_encode_existing_training_data and os.path.isfile(tmp_filepath1) and os.path.isfile(tmp_filepath2) and os.path.isfile(tmp_filepath3):
-                continue
-            
+
             # Print
             sys.stdout.write("\r{}/{}".format(i, len(label_paths)))
+            if not re_encode_existing_training_data and os.path.isfile(tmp_filepath1) and os.path.isfile(tmp_filepath2) and os.path.isfile(tmp_filepath3):
+                continue
 
             # Tokenize and Save label
             label = torch.LongTensor(tokenizer.encode(sentence))
