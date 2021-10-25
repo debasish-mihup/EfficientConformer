@@ -26,7 +26,6 @@ from tqdm import tqdm
 # Mihup 292.367 samples
 class MihupDataset(torch.utils.data.Dataset): 
     def __init__(self, dataset_path, training_params, tokenizer_params, split, args):
-        print("Debug1: ",dataset_path,split)
         self.names = glob.glob(dataset_path + split + "/*.wav")
         self.vocab_type = tokenizer_params["vocab_type"]
         self.vocab_size = str(tokenizer_params["vocab_size"])
@@ -38,7 +37,7 @@ class MihupDataset(torch.utils.data.Dataset):
             self.names = self.filter_lengths(training_params["eval_audio_max_length"], training_params["eval_audio_max_length"], args.rank)
 
     def __getitem__(self, i):
-
+        print("DEBUG X: ", self.names[i])
         if self.lm_mode:
             return [torch.load(self.names[i].split(".wav")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
         else:

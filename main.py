@@ -183,7 +183,7 @@ if __name__ == "__main__":
     # Args
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config_file",          type=str,   default="configs/EfficientConformerCTCSmall.json",  help="Json configuration file containing model hyperparameters")
-    parser.add_argument("-m", "--mode",                 type=str,   default="training",                                 help="Mode : training, validation-clean, test-clean, eval_time-dev-clean, ...")
+    parser.add_argument("-m", "--mode",                 type=str,   default="training",                                 help="Mode : training, validation")
     parser.add_argument("-d", "--distributed",          action="store_true",                                            help="Distributed data parallelization")
     parser.add_argument("-i", "--initial_epoch",        type=str,   default=None,                                       help="Load model from checkpoint")
     parser.add_argument("--initial_epoch_lm",           type=str,   default=None,                                       help="Load language model from checkpoint")
