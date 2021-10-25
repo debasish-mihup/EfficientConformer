@@ -69,10 +69,10 @@
         "eval_label_max_length": null,
 
         "training_dataset": "Mihup",
-        "training_dataset_path": "datasets/Mihup/",
+        "training_dataset_path": "datasets/MihupTraining/",
 
         "evaluation_dataset": "Mihup",
-        "evaluation_dataset_path": "datasets/Mihup/",
+        "evaluation_dataset_path": "datasets/MihupEvaluation/",
 
         "callback_path": "callbacks/ConformerCTCSmall/"
     },
