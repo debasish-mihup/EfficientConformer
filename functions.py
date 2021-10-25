@@ -89,15 +89,7 @@ def load_datasets(training_params, tokenizer_params, args):
         "Mihup": {
             "class": MihupDataset,
             "split": {
-                "training": "train",
-                "training-clean": "train-clean",
-                "validation-clean": None,
-                "validation-other": None,
-                "test-clean": None,
-                "test-other": None,
-                "eval_time": None,
-                "eval_time_encoder": None,
-                "eval_time_decoder": None,
+                "training": "train"
             }
         }
     }
@@ -108,8 +100,7 @@ def load_datasets(training_params, tokenizer_params, args):
         "Mihup": {
             "class": MihupDataset,
             "split": {
-                "training": "training",
-                "validation": "validation"
+                "validation": "validate"
             }
         },
     }
@@ -126,7 +117,7 @@ def load_datasets(training_params, tokenizer_params, args):
         if args.rank == 0:
             print("Loading training dataset : {} {}".format(training_params["training_dataset"], training_split))
 
-        dataset_train =  training_dataset(training_params["training_dataset_path"], training_params, tokenizer_params, training_split, args)
+        dataset_train = training_dataset(training_params["training_dataset_path"], training_params, tokenizer_params, training_split, args)
 
         if args.distributed:
             sampler = torch.utils.data.distributed.DistributedSampler(dataset_train, num_replicas=args.world_size,rank=args.rank)
