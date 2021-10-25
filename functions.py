@@ -104,7 +104,7 @@ def load_datasets(training_params, tokenizer_params, args):
             }
         },
     }
-    print("DEBUG6: ",args.mode)
+
     # Select Dataset and Split
     training_dataset = training_datasets[training_params["training_dataset"]]["class"]
     training_split = training_datasets[training_params["training_dataset"]]["split"][args.mode]
@@ -133,7 +133,7 @@ def load_datasets(training_params, tokenizer_params, args):
 
 
     # Evaluation Dataset
-    if  evaluation_split:
+    if evaluation_split:
 
         # Multiple Evaluation datasets
         if isinstance(evaluation_split, list):

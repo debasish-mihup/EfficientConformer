@@ -92,7 +92,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_exis
         print("Reading Corpus")
         label_paths = []
         sentences = []
-        for file_path in glob.glob(training_params["training_dataset_path"] + "*.txt"):
+        for file_path in glob.glob(training_params["training_dataset_path"] + "*/*.txt"):
             if "_corpus.txt" in file_path:
                 continue
             for line in open(file_path, "r").readlines():
