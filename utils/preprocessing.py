@@ -74,12 +74,12 @@ def create_tokenizer(training_params, tokenizer_params):
         if not os.path.isfile(corpus_path):
             print("Create Corpus File")
             corpus_file = open(corpus_path, "w")
-            for file_path in glob.glob(training_params["training_dataset_path"] + "*.txt"):
+            for file_path in glob.glob(training_params["training_dataset_path"] + "*/*.txt"):
                 for line in open(file_path, "r").readlines():
                     corpus_file.write(line[len(line.split()[0]) + 1:-1].lower() + "\n")
 
         # Train Tokenizer
-        print("Training Tokenizer",training_params["training_dataset_path"] + training_params["training_dataset"] + "_corpus.txt")
+        print("Training Tokenizer")
         spm.SentencePieceTrainer.train(input=training_params["training_dataset_path"] + training_params["training_dataset"] + "_corpus.txt", model_prefix=tokenizer_params["tokenizer_path"].split(".model")[0], vocab_size=tokenizer_params["vocab_size"], character_coverage=1.0, model_type=tokenizer_params["vocab_type"], bos_id=-1, eos_id=-1, unk_surface="")
         print("Training Done")
 
