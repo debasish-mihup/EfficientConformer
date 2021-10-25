@@ -104,7 +104,7 @@ def load_datasets(training_params, tokenizer_params, args):
             }
         },
     }
-
+    print("DEBUG6: ",args.mode)
     # Select Dataset and Split
     training_dataset = training_datasets[training_params["training_dataset"]]["class"]
     training_split = training_datasets[training_params["training_dataset"]]["split"][args.mode]
