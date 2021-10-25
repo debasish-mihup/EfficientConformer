@@ -40,7 +40,7 @@
     
     "tokenizer_params":
     {
-        "tokenizer_path": "datasets/Mihup/Mihup_bpe_256.model",
+        "tokenizer_path": "datasets/MihupTraining/Mihup_bpe_256.model",
         "vocab_type": "bpe",
         "vocab_size": 256
     },
