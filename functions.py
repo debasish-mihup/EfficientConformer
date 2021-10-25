@@ -89,7 +89,7 @@ def load_datasets(training_params, tokenizer_params, args):
         "Mihup": {
             "class": MihupDataset,
             "split": {
-                "training": "MihupTraining"
+                "training": "Training"
             }
         }
     }
@@ -100,7 +100,7 @@ def load_datasets(training_params, tokenizer_params, args):
         "Mihup": {
             "class": MihupDataset,
             "split": {
-                "training": "MihupEvaluation"
+                "training": "Evaluation"
             }
         },
     }
