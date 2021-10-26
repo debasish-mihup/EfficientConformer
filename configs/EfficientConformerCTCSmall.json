@@ -84,7 +84,7 @@
 
     "decoding_params":
     {
-        "beam_size": 16,
+        "beam_size": 8,
         "tmp": 1,
 
         "ngram_path": "callbacks/ngram/6gram_256.arpa",
