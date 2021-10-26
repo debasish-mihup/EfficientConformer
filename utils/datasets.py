@@ -55,7 +55,7 @@ class MihupDataset(torch.utils.data.Dataset):
             print("Mihup dataset filtering")
             print("Audio maximum length : {} / Label sequence maximum length : {}".format(audio_max_length, label_max_length))
             self.names = tqdm(self.names)
-        for name in self.names:
-            print("DEBUG5: ", name, " - ", torch.load(name + "_len"), " < ", audio_max_length, " - ", torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")), " <= ", label_max_length)
-        print("################### ---------------------- #########################")
+        # for name in self.names:
+        #     print("DEBUG5: ", name, " - ", torch.load(name + "_len"), " < ", audio_max_length, " - ", torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")), " <= ", label_max_length)
+        # print("################### ---------------------- #########################")
         return [name for name in self.names if torch.load(name + "_len") <= audio_max_length and torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")) <= label_max_length]
