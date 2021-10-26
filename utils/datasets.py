@@ -53,7 +53,6 @@ class MihupDataset(torch.utils.data.Dataset):
             return self.names
 
         if rank == 0:
-            print("Mihup dataset filtering")
             print("Audio maximum length : {} / Label sequence maximum length : {}".format(audio_max_length, label_max_length))
             self.names = tqdm(self.names)
         # for name in self.names:
