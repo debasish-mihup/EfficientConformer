@@ -22,6 +22,7 @@ import sentencepiece as spm
 # Other
 import glob
 from tqdm import tqdm
+import os
 
 # Mihup 292.367 samples
 class MihupDataset(torch.utils.data.Dataset): 
@@ -58,4 +59,4 @@ class MihupDataset(torch.utils.data.Dataset):
         # for name in self.names:
         #     print("DEBUG5: ", name, " - ", torch.load(name + "_len"), " < ", audio_max_length, " - ", torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")), " <= ", label_max_length)
         # print("################### ---------------------- #########################")
-        return [name for name in self.names if torch.load(name + "_len") <= audio_max_length and torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")) <= label_max_length]
+        return [name for name in self.names if os.path.isfile(name + "_len") and torch.load(name + "_len") <= audio_max_length and torch.load(name.replace("wav", self.vocab_type + "_" + self.vocab_size + "_len")) <= label_max_length]
