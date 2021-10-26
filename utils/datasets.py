@@ -31,17 +31,16 @@ class MihupDataset(torch.utils.data.Dataset):
         self.vocab_size = str(tokenizer_params["vocab_size"])
         self.lm_mode = training_params.get("lm_mode", False)
 
-        if split.split("-")[0] == "train":
+        if split.split("-")[0] == "Training":
             self.names = self.filter_lengths(training_params["train_audio_max_length"], training_params["train_label_max_length"], args.rank)
         else:
             self.names = self.filter_lengths(training_params["eval_audio_max_length"], training_params["eval_audio_max_length"], args.rank)
 
     def __getitem__(self, i):
-        print("DEBUG X: ", self.names[i])
         if self.lm_mode:
-            return [torch.load(self.names[i].split(".wav")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
+            return [torch.load(self.names[i][:-4] + "." + self.vocab_type + "_" + self.vocab_size)]
         else:
-            return [torchaudio.load(self.names[i])[0], torch.load(self.names[i].split(".wav")[0].split("_")[0] + "." + self.vocab_type + "_" + self.vocab_size)]
+            return [torchaudio.load(self.names[i])[0], torch.load(self.names[i][:-4] + "." + self.vocab_type + "_" + self.vocab_size)]
 
     def __len__(self):
 
