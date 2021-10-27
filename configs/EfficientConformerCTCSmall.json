@@ -69,7 +69,7 @@
         "K": 2,
 
         "train_audio_max_length": 320000,
-        "train_label_max_length": 256000,
+        "train_label_max_length": 320000,
         "eval_audio_max_length": null,
         "eval_label_max_length": null,
 
