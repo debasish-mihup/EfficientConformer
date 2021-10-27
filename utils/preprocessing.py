@@ -113,6 +113,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_exis
                 continue
 
             # Tokenize and Save label
+            print(audio_path_without_extension, " - ", sentence)
             label = torch.LongTensor(tokenizer.encode(sentence))
             torch.save(label, label_path)
             # Save Audio length
