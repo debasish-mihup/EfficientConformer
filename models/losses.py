@@ -17,7 +17,7 @@ import torch
 import torch.nn as nn
 
 # RNN-T Loss
-# import warp_rnnt
+import warp_rnnt
 
 class LossRNNT(nn.Module):
 
@@ -33,16 +33,15 @@ class LossRNNT(nn.Module):
         outputs_pred, f_len, _ = pred
 
         # Compute Loss
-        loss = None
-        #   warp_rnnt.rnnt_loss(
-        #     log_probs=torch.nn.functional.log_softmax(outputs_pred, dim=-1),
-        #     labels=y.int(),
-        #     frames_lengths=f_len.int(),
-        #     labels_lengths=y_len.int(),
-        #     average_frames=False,
-        #     reduction='mean',
-        #     blank=0,
-        #     gather=True)
+        loss = warp_rnnt.rnnt_loss(
+            log_probs=torch.nn.functional.log_softmax(outputs_pred, dim=-1),
+            labels=y.int(),
+            frames_lengths=f_len.int(),
+            labels_lengths=y_len.int(),
+            average_frames=False,
+            reduction='mean',
+            blank=0,
+            gather=True)
 
         return loss
 
