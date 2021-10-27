@@ -76,7 +76,7 @@ def create_tokenizer(training_params, tokenizer_params):
             corpus_file = open(corpus_path, "w")
             for file_path in glob.glob(training_params["training_dataset_path"] + "*/*.txt"):
                 for line in open(file_path, "r").readlines():
-                    corpus_file.write(line[len(line.split()[0]) + 1:-1].lower() + "\n")
+                    corpus_file.write(line[len(line.split()[0]) + 1:-1] + "\n")
 
         # Train Tokenizer
         print("Training Tokenizer")
@@ -102,7 +102,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_exis
         # Save Labels and lengths
         print("Encoding sequences")
         for i, (sentence, label_path) in enumerate(zip(sentences, label_paths)):
-            audio_path_without_extension = ".".join(label_path.split(".")[:-1])
+            audio_path_without_extension = label_path[:-4]
             tmp_filepath1 = audio_path_without_extension + ".wav"
             tmp_filepath2 = audio_path_without_extension + ".wav_len"
             tmp_filepath3 = label_path + "_len"
@@ -113,7 +113,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_exis
                 continue
 
             # Tokenize and Save label
-            print(audio_path_without_extension, " - ", sentence)
+            # print(audio_path_without_extension, " - ", sentence)
             label = torch.LongTensor(tokenizer.encode(sentence))
             torch.save(label, label_path)
             # Save Audio length
