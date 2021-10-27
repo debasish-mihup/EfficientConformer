@@ -102,7 +102,7 @@ def prepare_dataset(training_params, tokenizer_params, tokenizer, re_encode_exis
         # Save Labels and lengths
         print("Encoding sequences")
         for i, (sentence, label_path) in enumerate(zip(sentences, label_paths)):
-            audio_path_without_extension = label_path[:-4]
+            audio_path_without_extension = ".".join(label_path.split(".")[:-1])
             tmp_filepath1 = audio_path_without_extension + ".wav"
             tmp_filepath2 = audio_path_without_extension + ".wav_len"
             tmp_filepath3 = label_path + "_len"
