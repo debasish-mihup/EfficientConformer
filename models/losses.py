@@ -61,7 +61,7 @@ class LossCTC(nn.Module):
 
         # Unpack Predictions
         outputs_pred, f_len, _ = pred
-
+        print("********  CTC LOSS *******   T:", f_len.tolist(), "U:", y_len.tolist())
         # Compute Loss
         loss = self.loss(
              log_probs=torch.nn.functional.log_softmax(outputs_pred, dim=-1).transpose(0, 1),
