@@ -53,7 +53,7 @@ class LossCTC(nn.Module):
         super(LossCTC, self).__init__()
 
         # CTC Loss
-        self.loss = nn.CTCLoss(blank=0, reduction="none", zero_infinity=False)
+        self.loss = nn.CTCLoss(blank=0, reduction="none", zero_infinity=True)
 
     def forward(self, batch, pred):
 
@@ -62,7 +62,7 @@ class LossCTC(nn.Module):
 
         # Unpack Predictions
         outputs_pred, f_len, _ = pred
-        print("********  CTC LOSS *******   T:", f_len.tolist(), "U:", y_len.tolist())
+        # print("********  CTC LOSS *******   T:", f_len.tolist(), "U:", y_len.tolist())
         # Compute Loss
         loss = self.loss(
              log_probs=torch.nn.functional.log_softmax(outputs_pred, dim=-1).transpose(0, 1),
