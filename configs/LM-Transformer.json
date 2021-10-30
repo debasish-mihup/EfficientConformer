@@ -57,7 +57,7 @@
 
     "decoding_params":
     {
-        "beam_size": 8,
+        "beam_size": 16,
         "tmp": 1
     }
 }
