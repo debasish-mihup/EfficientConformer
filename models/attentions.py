@@ -1183,7 +1183,7 @@ class SinusoidalPositionalEncoding(nn.Module):
         pos_encoding[:, 1::2] = angles.cos()
         pos_encoding = pos_encoding.unsqueeze(0)
 
-        self.register_buffer('pos_encoding', pos_encoding) # persistent=False
+        self.register_buffer('pos_encoding', pos_encoding, persistent=False) # persistent=False
 
     def forward(self, batch_size=1, seq_len=None):
 
@@ -1226,7 +1226,7 @@ class RelativeSinusoidalPositionalEncoding(nn.Module):
 
         pos_encoding = pos_encoding.unsqueeze(0)
 
-        self.register_buffer('pos_encoding', pos_encoding) # persistent=False
+        self.register_buffer('pos_encoding', pos_encoding, persistent=False) # persistent=False
         self.max_len = max_len
         self.causal = causal
 
@@ -1285,7 +1285,7 @@ class GroupedRelativeSinusoidalPositionalEncoding(nn.Module):
 
         pos_encoding = pos_encoding.unsqueeze(0)
 
-        self.register_buffer('pos_encoding', pos_encoding) # persistent=False
+        self.register_buffer('pos_encoding', pos_encoding, persistent=False) # persistent=False
         self.max_len = max_len
         self.causal = causal
         self.group_size = group_size
