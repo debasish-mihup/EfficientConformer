@@ -43,7 +43,7 @@
         "arch": "RNN",
         "num_layers": 1,
         "dim_model": 320,
-        "vocab_size": 256
+        "vocab_size": 1000
     },
 
     "joint_params":
