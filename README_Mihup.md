@@ -27,3 +27,6 @@ optional arguments:
 --create_tokenizer (Creates the sentencepiece tokenizer)
 
 Note: If now new audio files are added then you only need run main.py with optional arguments once
+
+
+python main.py --config_file configs/EfficientConformerTransducerSmall.json --prepare_dataset --re_encode_dataset=True --create_tokenizer

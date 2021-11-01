@@ -32,7 +32,7 @@ class LossRNNT(nn.Module):
         # Unpack Predictions
         outputs_pred, f_len, _ = pred
 
-        print("********  WARP RNNT *******   T:", f_len.tolist(), "U:", y_len.tolist())
+        #print("********  WARP RNNT *******   T:", f_len.tolist(), "U:", y_len.tolist())
         # Compute Loss
         loss = warp_rnnt.rnnt_loss(
             log_probs=torch.nn.functional.log_softmax(outputs_pred, dim=-1),
