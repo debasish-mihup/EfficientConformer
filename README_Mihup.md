@@ -38,6 +38,7 @@ pip install https://github.com/kpu/kenlm/archive/master.zip
 
 
 git clone https://github.com/kmario23/KenLM-training
+cd kenlm
 cmake .
 make
 bin/lmplz -o 6 <'/NAS1/debasish_repo/efficient_conformer_data/first_run/EfficientConformer/datasets/Mihup-lm-norm.txt' >6gram_kenlm.arpa
