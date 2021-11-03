@@ -30,3 +30,14 @@ Note: If now new audio files are added then you only need run main.py with optio
 
 
 python main.py --config_file configs/EfficientConformerTransducerSmall.json --prepare_dataset --re_encode_dataset=True --create_tokenizer
+
+
+################ TRAIN n-gram (6-gram) KenLM
+# To install python module
+pip install https://github.com/kpu/kenlm/archive/master.zip
+
+
+git clone https://github.com/kmario23/KenLM-training
+cmake .
+make
+bin/lmplz -o 4 <'/NAS1/debasish_repo/efficient_conformer_data/first_run/EfficientConformer/datasets/Mihup-lm-norm.txt' >4gram_kenlm.arpa
