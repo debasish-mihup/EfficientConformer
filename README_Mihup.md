@@ -43,5 +43,6 @@ cmake .
 make
 bin/lmplz -o 6 <'/NAS1/debasish_repo/efficient_conformer_data/first_run/EfficientConformer/datasets/Mihup-lm-norm.txt' >6gram_kenlm.arpa
 
+# To prune --prune 0 0 0 0 0 1
 
 # Reference material about KenLM: https://web.stanford.edu/~jurafsky/slp3/3.pdf
