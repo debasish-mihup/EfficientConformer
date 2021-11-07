@@ -146,8 +146,10 @@ class SpecAugment(nn.Module):
             for b in range(x.size(0)):
                 T = int(self.pS * x_len[b])
                 for _ in range(self.mT):
-                    x[b, :, :x_len[b]] = torchaudio.transforms.TimeMasking(time_mask_param=T).forward(x[b, :, :x_len[b]])
-
+                    try:
+                        x[b, :, :x_len[b]] = torchaudio.transforms.TimeMasking(time_mask_param=T).forward(x[b, :, :x_len[b]])
+                    except Exception as e:
+                        continue
         return x
 
 ###############################################################################
@@ -403,7 +405,7 @@ class MultiHeadSelfAttentionModule(nn.Module):
         num_heads: number of attention heads
         Pdrop: residual dropout probability
         max_pos_encoding: maximum position
-        relative_pos_enc: whether to use relative postion embedding
+        relative_pos_enc: whether to use relative position embedding
         causal: True for causal attention with masked future context
         group_size: Attention group size
         kernel_size: Attention kernel size
