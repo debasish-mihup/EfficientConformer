@@ -97,7 +97,7 @@ class AudioPreprocessing(nn.Module):
 
         # Compute Sequence lengths 
         if x_len is not None:
-            x_len = x_len // self.hop_length + 1
+            x_len = torch.div(x_len, self.hop_length, rounding_mode='floor') + 1
 
         # Normalize
         if self.normalize:
@@ -196,7 +196,7 @@ class Conv1dSubsampling(nn.Module):
 
             # Update Sequence Lengths
             if x_len is not None:
-                x_len = (x_len - 1) // 2 + 1
+                x_len = torch.div(x_len - 1, 2, rounding_mode='floor') + 1
 
         return x, x_len
 
@@ -242,7 +242,7 @@ class Conv2dSubsampling(nn.Module):
 
             # Update Sequence Lengths
             if x_len is not None:
-                x_len = (x_len - 1) // 2 + 1
+                x_len = torch.div(x_len - 1, 2, rounding_mode='floor') + 1
 
         # (B, C, D // S, T // S) -> (B,  C * D // S, T // S)
         batch_size, channels, subsampled_dim, subsampled_length = x.size()
@@ -293,7 +293,7 @@ class Conv2dPoolSubsampling(nn.Module):
 
             # Update Sequence Lengths
             if x_len is not None:
-                x_len = (x_len - 1) // 2 + 1
+                x_len = torch.div(x_len - 1, 2, rounding_mode='floor') + 1
 
         # (B, C, D // S, T // S) -> (B,  C * D // S, T // S)
         batch_size, channels, subsampled_dim, subsampled_length = x.size()
@@ -349,7 +349,7 @@ class VGGSubsampling(nn.Module):
 
             # Update Sequence Lengths
             if x_len is not None:
-                x_len = x_len // 2
+                x_len = torch.div(x_len, 2, rounding_mode='floor')
 
         # (B, C, D // S, T // S) -> (B,  C * D // S, T // S)
         batch_size, channels, subsampled_dim, subsampled_length = x.size()
@@ -591,8 +591,8 @@ class ContextNetSubsampling(nn.Module):
 
         # Update Sequence Lengths
         if x_len is not None:
-            x_len = (x_len - 1) // 2 + 1
-            x_len = (x_len - 1) // 2 + 1
+            x_len = torch.div(x_len - 1, 2, rounding_mode='floor') + 1
+            x_len = torch.div(x_len - 1, 2, rounding_mode='floor') + 1
 
         return x, x_len
 
